@@ -24,9 +24,22 @@
     // 🧠 The new person will have a `name` prop initialised to the desired name, and an `age` prop initialised to 0.
     // 🧠 The person also has an `ageGracefully` method, which increases `age` by 1 each time it's called.
     // 🧠 But there's a catch: once `age` reaches 12, the `ageGracefully` method will have no effect.
-    class PeterPan {
 
+    class PeterPan {
+      constructor (name) {
+         this.name = name;
+         this.age = 0 // info doesn't need to be provided by the outside b/c it's set to 0, so it ins't in the ()
+      }
+
+      ageGracefully(age) {
+        if (this.age < 12) {
+          this.age++
+        } 
+      }
+     
     }
+    const person = new PeterPan();
+   
 
     // 👉 CHALLENGE 2
     // 🧠 Build an AirPlane class. This class allows to instantiate airplanes.
@@ -38,17 +51,58 @@
     // 🧠 Calling `down` changes the `altitude` prop appropriately and returns the updated `altitude`.
     // 🧠 If calling `down` would cause the plane to go below altitude zero, `altitude` is set to 0 and the string "CRASH!" is returned.
     class AirPlane {
+      constructor (model) {
+        this.model = model;
+        this.altitude = 0;
+      }
+       up(meters) {
+         this.altitude += meters;
+         return this.altitude;
+       }
+
+       down(meters) {
+        if(this.altitude >= meters) {
+           this.altitude -= meters;
+           return this.altitude;
+        }
+        this.altitude = 0;
+        return "CRASH!"
+       }
 
     }
+    const plane = new AirPlane();
 
-    // 👉 CHALLENGE 3
+    //DO MANUAL TESTING ALONG THE WAY!!!
+
+    // 👉 CHALLENGE 
     // 🧠 Build a Bulb class.
     // 🧠 All new bulbs are initialised with a prop `isOn` and three methods: `turnOn`, `turnOff` and `toggle`.
     // 🧠 The initial value of `isOn` will be the Boolean false.
     // 🧠 The methods work as one might expect, changing the value of `isOn` to the appropriate Boolean.
     // 🧠 The methods also return one of these two strings: "You turned the bulb ON", or "You turned the bulb OFF".
     class Bulb {
-
+      
+      isOn = false; //don't need a constructor
+      
+      turnOn() {
+        this.isOn = true
+        return "You turned the bulb ON"
+       
+      }
+    
+      turnOff() {
+        this.isOn = false
+        return "You turned the bulb OFF"
+       
+       }
+      
+      toggle() {
+        this.isOn = !this.isOn
+        if(this.isOn) {
+          return "You turned the bulb ON"
+        }
+        return "You turned the bulb OFF" //no need for an else statement, the first return would end the method if true
+      }
     }
 
     // 👉 CHALLENGE 4
@@ -66,8 +120,22 @@
     //   minusThree.count() // returns null
     //   minusThree.count() // returns null
     class CountDown {
-
+      constructor (num) {
+        this.currentNum = num; // currentNum because it will be changing, with num as the parameter
+      }
+      count() {
+        if (this.currentNum >= 1) {
+        return `${this.currentNum--}!` // -- means post decrement
+        } else if (this.currentNum === 0) {
+          this.currentNum--
+          return 'Liftoff!'
+        } else {
+          return null
+        }
+        
     }
+  }
+    
 
     // 🧪 TESTS, do not work below this line
     // 🧪 TESTS, do not work below this line
